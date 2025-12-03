@@ -2,6 +2,33 @@
 
 **Strict rules for file names, directory organization, and import patterns.**
 
+## 0. AI Directory Structure
+
+**Canonical layout for AI-focused code under `apps/example/src/ai/`.**
+
+```
+apps/example/src/ai/
+├── agents/
+│   ├── triage.ts          # Specialist routing + prioritization
+│   ├── research.ts        # Affordability + market research flows
+│   └── reports.ts         # Financial intelligence synthesis
+├── tools/
+│   ├── search/            # Web + data search tools
+│   ├── analytics/         # Business/finance analytics tools
+│   └── reports/           # Report + narrative generators
+├── artifacts/             # Code execution outputs, generated files
+└── hooks/                 # Shared AI hooks (LLM orchestrations, state)
+```
+
+### Usage Guidelines
+
+- **`agents/`** hosts each orchestration pipeline (triage, research, reports). Keep prompting, routing, streaming, and specialist escalation logic inside these files.
+- **`tools/`** groups `defineTool` implementations by capability; colocate schemas and validators with each tool for strong typing.
+- **`artifacts/`** stores any generated artifacts/code outputs consumed by agents or the UI (e.g., executed code blobs, downloadable files).
+- **`hooks/`** provides reusable AI-specific hooks (stream management, tool wiring, artifact state). Reserve root-level hooks for non-AI logic.
+
+_Use this structure whenever referencing or adding AI features; the remaining sections describe general project-wide conventions._
+
 ---
 
 ## 1. File Naming Conventions
