@@ -48,6 +48,16 @@ export const aiChatTextMap = {
   aiReady: 'Listo para ayudarte',
   aiOffline: 'Sin conexión',
 
+  // Message senders
+  senderUser: 'Tú',
+  senderAI: 'Asistente IA',
+  senderSystem: 'Sistema',
+
+  // Message status
+  statusSending: 'Enviando...',
+  statusSent: 'Enviado',
+  statusError: 'Error',
+
   // Message roles
   roleUser: 'Tú',
   roleAssistant: 'Asistente',

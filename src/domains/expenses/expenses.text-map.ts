@@ -157,6 +157,20 @@ export const expensesTextMap = {
   dateRangeFormat: 'dd MMM',
   monthYearFormat: 'MMMM yyyy',
 
+  // Relative dates
+  dateToday: 'Hoy',
+  dateYesterday: 'Ayer',
+
+  // Date range picker
+  dateRangePlaceholder: 'Selecciona rango de fechas',
+  presetsLabel: 'Preselecciones',
+  presetToday: 'Hoy',
+  presetThisWeek: 'Esta semana',
+  presetThisMonth: 'Este mes',
+  presetThisYear: 'Este año',
+  presetLastMonth: 'Mes pasado',
+  presetLastYear: 'Año pasado',
+
   // Currency formatting
   currencySymbol: '$',
   currencyFormat: '$ {amount}',

@@ -208,9 +208,14 @@ export function DateRangePicker({
 
   const disabledMatcher = getDisabledMatcher();
 
-  const handleSelect = (range: DateRange | undefined) => {
-    if (range) {
-      onDateRangeChange?.(range);
+  const handleSelect = (range: { from?: Date; to?: Date } | undefined) => {
+    if (range && range.from) {
+      // Convert react-day-picker DateRange (undefined) to our DateRange (null)
+      const convertedRange: DateRange = {
+        from: range.from,
+        to: range.to || null,
+      };
+      onDateRangeChange?.(convertedRange);
     }
   };
 
@@ -285,8 +290,8 @@ export function DateRangePicker({
             <Calendar
               mode="range"
               selected={
-                dateRange?.from && dateRange?.to
-                  ? { from: dateRange.from, to: dateRange.to }
+                dateRange?.from
+                  ? { from: dateRange.from, to: dateRange.to || undefined }
                   : undefined
               }
               onSelect={handleSelect}
