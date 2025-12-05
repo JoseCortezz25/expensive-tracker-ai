@@ -96,7 +96,7 @@ export function SearchBar({
   autoFocus = false,
 }: SearchBarProps) {
   const [localValue, setLocalValue] = React.useState(value);
-  const timeoutRef = React.useRef<NodeJS.Timeout>();
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   // Sync local value with prop value

@@ -9,6 +9,15 @@
 
 'use client';
 
+import {
+  UtensilsCrossed,
+  Car,
+  Gamepad2,
+  Heart,
+  ShoppingBag,
+  Briefcase,
+  Package
+} from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import type { ExpenseCategory } from '../../types';
@@ -51,43 +60,43 @@ const categoryConfig: Record<
   {
     label: string;
     colors: string;
-    icon: string;
+    Icon: React.ComponentType<{ className?: string }>;
   }
 > = {
   Comida: {
     label: expensesTextMap.categoryComida,
     colors: 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400',
-    icon: '🍕',
+    Icon: UtensilsCrossed,
   },
   Transporte: {
     label: expensesTextMap.categoryTransporte,
     colors: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
-    icon: '🚗',
+    Icon: Car,
   },
   Entretenimiento: {
     label: expensesTextMap.categoryEntretenimiento,
     colors: 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400',
-    icon: '🎮',
+    Icon: Gamepad2,
   },
   Salud: {
     label: expensesTextMap.categorySalud,
     colors: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
-    icon: '🏥',
+    Icon: Heart,
   },
   Compras: {
     label: expensesTextMap.categoryCompras,
     colors: 'bg-pink-100 text-pink-800 dark:bg-pink-900/20 dark:text-pink-400',
-    icon: '🛍️',
+    Icon: ShoppingBag,
   },
   Servicios: {
     label: expensesTextMap.categoryServicios,
     colors: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/20 dark:text-cyan-400',
-    icon: '💼',
+    Icon: Briefcase,
   },
   Otros: {
     label: expensesTextMap.categoryOtros,
     colors: 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400',
-    icon: '📦',
+    Icon: Package,
   },
 };
 
@@ -132,12 +141,13 @@ export function CategoryBadge({
   onClick,
 }: CategoryBadgeProps) {
   const config = categoryConfig[category];
+  const { Icon } = config;
 
   return (
     <Badge
       variant="secondary"
       className={cn(
-        'inline-flex items-center gap-1 font-medium transition-colors',
+        'inline-flex items-center gap-1.5 font-medium transition-colors',
         config.colors,
         getSizeClasses(size),
         onClick && 'cursor-pointer hover:opacity-80',
@@ -157,7 +167,7 @@ export function CategoryBadge({
           : undefined
       }
     >
-      {showIcon && <span className="text-base leading-none">{config.icon}</span>}
+      {showIcon && <Icon className="size-3.5" />}
       <span>{config.label}</span>
     </Badge>
   );
@@ -183,14 +193,11 @@ export function CategoryIcon({
   className,
 }: Pick<CategoryBadgeProps, 'category' | 'className'>) {
   const config = categoryConfig[category];
+  const { Icon } = config;
 
   return (
-    <span
-      className={cn('inline-flex text-lg leading-none', className)}
-      title={config.label}
-      aria-label={config.label}
-    >
-      {config.icon}
+    <span title={config.label} aria-label={config.label}>
+      <Icon className={cn('size-4', className)} />
     </span>
   );
 }
@@ -210,8 +217,8 @@ export function getCategoryLabel(category: ExpenseCategory): string {
 }
 
 /**
- * Get category icon emoji
+ * Get category icon component
  */
-export function getCategoryIcon(category: ExpenseCategory): string {
-  return categoryConfig[category].icon;
+export function getCategoryIconComponent(category: ExpenseCategory): React.ComponentType<{ className?: string }> {
+  return categoryConfig[category].Icon;
 }

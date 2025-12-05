@@ -9,8 +9,11 @@
 
 'use client';
 
-import { useExpenseFiltersStore } from '../stores/expense-filters-store';
+import { useExpenseFiltersStore, useHasActiveFilters as _useHasActiveFilters } from '../stores/expense-filters-store';
 import type { ExpenseCategory, DateRange, ExpenseSort, ExpenseFiltersState } from '../types';
+
+// Re-export useHasActiveFilters from store
+export { _useHasActiveFilters as useHasActiveFilters };
 
 /**
  * Hook for managing expense filters

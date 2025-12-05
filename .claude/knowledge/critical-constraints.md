@@ -515,6 +515,57 @@ export function WorkoutDashboard({ userId }: { userId: string }) {
 }
 ```
 
+---
+
+## 12. Granular framework imports only
+
+❌ **NEVER**: Import entire namespaces (e.g., `import * as React` or `import React from 'react'`) just to reach hooks or helpers via dot notation  
+✅ **ALWAYS**: Import only the exact symbols actually used (e.g., `import { useEffect } from 'react'`)
+
+**Correct example**:
+
+```tsx
+import { useEffect, useMemo } from 'react';
+
+export function UseEffectExample() {
+  useEffect(() => {
+    // logic
+  }, []);
+
+  return null;
+}
+```
+
+**Incorrect example**:
+
+```tsx
+import React from 'react';
+
+export function UseEffectExample() {
+  React.useEffect(() => {
+    // logic
+  }, []);
+
+  return null;
+}
+```
+
+---
+
+## 13. Documentation strategy focused on JSDoc
+
+❌ **NEVER**: Add ad-hoc Markdown/plain-text docs inside page/component files or annotate JSX blocks with narrative comments  
+✅ **ALWAYS**: Document behavior through concise JSDoc blocks on exported functions, hooks, or utilities; omit extra prose unless absolutely required by compliance
+
+```tsx
+/**
+ * @description Handles AI layout reasoning. Keep docs in JSDoc, not inline prose.
+ */
+export function useLayoutReasoner() {
+  // implementation
+}
+```
+
 **Incorrect example**:
 
 ```tsx
@@ -548,6 +599,65 @@ export function WorkoutDashboard({ userId }: { userId: string }) {
 }
 ```
 
+---
+
+## 14. Conditional class merging: Always use `cn` utility
+
+❌ **NEVER**: Use string interpolation, template literals, or manual concatenation for conditional classes  
+✅ **ALWAYS**: Use the `cn` utility from `@/lib/class-names` for any conditional class merging
+
+**Correct example**:
+
+```tsx
+import { cn } from '@/lib/class-names';
+
+export function MessageBubble({
+  isUser,
+  isError
+}: {
+  isUser: boolean;
+  isError?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        'base-class',
+        isUser && 'user-specific-class',
+        isError && 'error-class'
+      )}
+    >
+      {/* ✅ All conditional classes merged with cn */}
+    </div>
+  );
+}
+```
+
+**Incorrect example**:
+
+```tsx
+// ❌ INCORRECT: String interpolation
+export function MessageBubble({ isUser }: { isUser: boolean }) {
+  return (
+    <div className={`base-class ${isUser ? 'user-class' : ''}`}>
+      {/* ❌ Never use template literals or interpolation */}
+    </div>
+  );
+}
+
+// ❌ INCORRECT: Manual concatenation
+export function MessageBubble({ isUser }: { isUser: boolean }) {
+  const classes = 'base-class' + (isUser ? ' user-class' : '');
+  return <div className={classes}> {/* ❌ Never concatenate manually */}</div>;
+}
+```
+
+**Why `cn` is mandatory**:
+
+- Ensures consistent class merging behavior across the codebase
+- Properly handles conditional classes, preventing empty strings or undefined values
+- Integrates with Tailwind CSS class deduplication
+- Prevents style conflicts and ensures predictable CSS output
+
 ## Verification Checklist for Agents
 
 Before proceeding with any task, verify:
@@ -571,3 +681,4 @@ Before proceeding with any task, verify:
 - [ ] Protected route? → Middleware + Server Action + Client UI validation
 - [ ] Repeated styles? → Extract to @apply in appropriate CSS files and using BEM.
 - [ ] Complex logic in component? → Extract to custom hook in `/domains/{domain}/hooks/`
+- [ ] Conditional classes? → Must use `cn` utility from `@/lib/class-names`, never interpolation or concatenation

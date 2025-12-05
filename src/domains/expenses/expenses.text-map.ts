@@ -17,7 +17,9 @@ export const expensesTextMap = {
   // Actions
   addExpense: 'Agregar Gasto',
   addExpenseShort: 'Agregar',
+  addExpenseDescription: 'Registra un nuevo gasto',
   editExpense: 'Editar Gasto',
+  editExpenseDescription: 'Modifica los detalles del gasto',
   deleteExpense: 'Eliminar Gasto',
   saveExpense: 'Guardar',
   cancel: 'Cancelar',

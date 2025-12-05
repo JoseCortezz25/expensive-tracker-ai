@@ -12,6 +12,7 @@
 import * as React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { User, Bot, Info, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 import { aiChatTextMap } from '../../ai-chat.text-map';
@@ -74,28 +75,28 @@ function getSenderConfig(sender: MessageBubbleProps['sender']) {
         label: aiChatTextMap.senderUser || 'Tú',
         bgColor: 'bg-primary text-primary-foreground',
         alignment: 'ml-auto',
-        avatar: '👤',
+        Icon: User,
       };
     case 'ai':
       return {
         label: aiChatTextMap.senderAI || 'Asistente IA',
         bgColor: 'bg-secondary text-secondary-foreground',
         alignment: 'mr-auto',
-        avatar: '🤖',
+        Icon: Bot,
       };
     case 'system':
       return {
         label: aiChatTextMap.senderSystem || 'Sistema',
         bgColor: 'bg-muted text-muted-foreground',
         alignment: 'mx-auto',
-        avatar: 'ℹ️',
+        Icon: Info,
       };
     default:
       return {
         label: 'Unknown',
         bgColor: 'bg-muted text-muted-foreground',
         alignment: 'mx-auto',
-        avatar: '❓',
+        Icon: HelpCircle,
       };
   }
 }
@@ -258,7 +259,7 @@ export function MessageBubble({
       {/* Sender Label (only for AI and system messages) */}
       {sender !== 'user' && (
         <div className="flex items-center gap-1.5 px-2 text-xs font-medium text-muted-foreground">
-          <span>{config.avatar}</span>
+          <config.Icon className="size-3" />
           <span>{config.label}</span>
         </div>
       )}

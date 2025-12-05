@@ -56,6 +56,11 @@ export interface MetricCardProps {
   isLoading?: boolean;
 
   /**
+   * Click handler (makes card interactive)
+   */
+  onClick?: () => void;
+
+  /**
    * Additional CSS classes
    */
   className?: string;
@@ -193,6 +198,7 @@ export function MetricCard({
   trend,
   trendSentiment = 'neutral',
   isLoading = false,
+  onClick,
   className,
   variant = 'default',
 }: MetricCardProps) {
@@ -200,6 +206,7 @@ export function MetricCard({
     'p-6 transition-all hover:shadow-md',
     variant === 'outline' && 'border-2',
     variant === 'ghost' && 'border-0 shadow-none',
+    onClick && 'cursor-pointer',
     className
   );
 
@@ -219,7 +226,7 @@ export function MetricCard({
   }
 
   return (
-    <Card className={cardClassName}>
+    <Card className={cardClassName} onClick={onClick}>
       <div className="space-y-2">
         {/* Header: Label + Icon */}
         <div className="flex items-center justify-between">

@@ -19,6 +19,16 @@ export const dashboardTextMap = {
   viewAllExpenses: 'Ver todos los gastos',
   addExpense: 'Agregar gasto',
 
+  // Success messages
+  expenseCreated: 'Gasto creado exitosamente',
+  expenseUpdated: 'Gasto actualizado exitosamente',
+  expenseDeleted: 'Gasto eliminado exitosamente',
+
+  // Error messages
+  errorCreatingExpense: 'Error al crear el gasto',
+  errorUpdatingExpense: 'Error al actualizar el gasto',
+  errorDeletingExpense: 'Error al eliminar el gasto',
+
   // Metrics panel heading
   metricsHeading: 'Métricas del mes',
   metricsSubheading: 'Resumen financiero actual',
@@ -32,6 +42,12 @@ export const dashboardTextMap = {
   topSpendingCategory: 'Categoría con más gastos',
   transactionCount: 'Transacciones',
   transactionCountFull: 'Número de transacciones',
+
+  // Metric labels (short versions for cards)
+  metricTotalSpent: 'Total Gastado',
+  metricAverageDaily: 'Promedio Diario',
+  metricTopCategory: 'Categoría Principal',
+  metricTransactionCount: 'Transacciones',
 
   // Metric descriptions (for tooltips/help text)
   totalSpentDescription: 'Suma de todos tus gastos del mes actual',
@@ -76,6 +92,11 @@ export const dashboardTextMap = {
   recentViewAll: 'Ver todos',
   recentShowMore: 'Mostrar más',
   recentShowLess: 'Mostrar menos',
+
+  // Aliases for recent expenses
+  noRecentExpenses: 'No hay gastos recientes',
+  recentExpensesHeading: 'Gastos Recientes',
+  viewAll: 'Ver todos',
 
   // Time periods
   thisMonth: 'Este mes',
